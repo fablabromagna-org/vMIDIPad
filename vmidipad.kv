@@ -1,0 +1,99 @@
+#:kivy 1.10.0
+
+#:import utils kivy.utils
+#:import Factory kivy.factory.Factory
+<ButtonConfigPopup@Popup>:
+    id: btnpopup
+    auto_dismiss: False
+    orientation: "vertical"
+    BoxLayout:
+        spacing: '10dp'
+        orientation: "vertical"
+        Label:
+            text:'Set the MIDI message for the button:'
+
+        
+
+        Spinner:
+            text: 'MIDI message type'
+            values:'Control Change (CC)', 'Program Change (PC)', 'Note (not supported yet)'
+        
+            on_text:
+                print("The spinner {} has text {}".format(self, self.text))
+
+
+        BoxLayout:
+
+            Button:
+                text: 'OK'
+                on_release: root.dismiss()
+            Button:
+                text: 'Cancel'
+                on_release: root.dismiss()
+
+
+<EditCheckbox@BoxLayout+ActionItem>: # Inheritance in .kv
+    ActionLabel:
+        text: "Edit Mode"
+    ActionCheck:
+        
+
+
+<MainWindow>:
+    id: mainWindow
+            
+    # manager: screen_manager
+    orientation: "vertical"
+    ActionBar:
+
+        size_hint_y: 0.1
+        ActionView:
+            use_separator: True
+            ActionPrevious:
+                # title: "mymy"
+                with_previous: False
+                
+            # EditCheckbox:
+            #     on_press: app.edit_mode()
+               
+
+
+            ActionLabel:
+                text: "Edit Mode"
+            ActionCheck:
+                on_press: mainPad.set_edit_mode(self.active)
+
+            ActionSeparator:
+
+            ActionButton:
+                text: "Load Layout"
+              
+            ActionButton:
+                text: "Save Layout"
+                # on_release: app.save_layout()
+            ActionButton:
+                text: "?"
+                # on_release: app.about()
+
+            ActionLabel:
+                text: str(mainPad.edit_mode)
+
+
+    MainPad:
+        id: mainPad
+
+        canvas.before:
+            Color:
+                rgb :1,1,0 if self.edit_mode else 1,1,1
+        
+                # rgb: utils.get_color_from_hex('#39B3F2')
+
+
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+        
+        
+
+   
