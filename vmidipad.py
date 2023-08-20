@@ -14,6 +14,8 @@ from kivy.graphics import Color, Rectangle, Ellipse
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.actionbar import ActionBar, ActionView, ActionButton, ActionCheck, ActionSeparator
+from kivy.uix.checkbox import CheckBox
+
 from kivy.uix.popup import Popup
 
 
@@ -102,7 +104,7 @@ class MainPad(GridLayout):
         super(MainPad, self).__init__(**kwargs)
         self.padding = 10
         self.midi_port = mido.open_output()
-        self.edit_mode = False
+        self.edit_mode = True
 
         self.cols = PAD_COLS
         self.spacing = 20
@@ -119,6 +121,8 @@ class MainPad(GridLayout):
             pad_button.bind(state = self.btn_callback)
             self.add_widget(pad_button)
 
+
+        
 
     def set_edit_mode(self, isediting):
         self.edit_mode = isediting
@@ -180,7 +184,6 @@ class VMidiPadApp(App):
        
         return (
             MainWindow()
-            # MainPad()
         )
 if __name__ == '__main__':
     VMidiPadApp().run()

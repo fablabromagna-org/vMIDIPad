@@ -10,25 +10,51 @@
         spacing: '10dp'
         orientation: "vertical"
         Label:
+            size_hint_y: 0.2
             text:'Set the MIDI message for the button:'
+            font_size: dp(25)
 
         
+        BoxLayout:
+            size_hint: 1,.4
+            font_size: self.height * 0.8
+            Label:
+                text: 'MIDI message type:'
+                bold: True
+                size_hint: .3,1
+                
 
-        Spinner:
-            text: 'MIDI message type'
-            values:'Control Change (CC)', 'Program Change (PC)', 'Note (not supported yet)'
-        
-            on_text:
-                print("The spinner {} has text {}".format(self, self.text))
+            CheckBox:
+                id: selCC
+                group: 'msg_type'
+                size_hint: .08,1
 
+            Label:
+                text: 'Control Change (CC)'
+                size_hint: .25,1
+            CheckBox:
+                id: selPC
+                group: 'msg_type'
+                size_hint: .08,1
+            Label:
+                text: 'Program Change (PC)'
+                size_hint: .25,1
+            CheckBox:
+                id: selNote
+                group: 'msg_type'
+                size_hint: .08,1
+            Label:
+                text: 'Note ON/OFF'
+                size_hint: .25,1
 
         BoxLayout:
+            size_hint_y: 0.25
 
             Button:
-                text: 'OK'
+                text: 'Cancel'
                 on_release: root.dismiss()
             Button:
-                text: 'Cancel'
+                text: 'OK'
                 on_release: root.dismiss()
 
 
